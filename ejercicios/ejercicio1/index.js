@@ -22,36 +22,21 @@ const app = express();
 const routesCategories = require("./routes/categories");
 const routesBooks = require("./routes/books");
 const bodyParser = require("body-parser");
-<<<<<<< Updated upstream
-const errorHandler = require("./modules/error-handler");
 const mongo = require("./modules/mongo");
-=======
-const mongo = require('./modules/mongo');
->>>>>>> Stashed changes
 
 // Lo vemos en la próxima clase
 
 
 app.use(bodyParser.json());
 
-app.get("/categories", routesCategories.list);
-app.post("/categories", routesCategories.create);
-app.get("/categories/:id", routesCategories.get);
-// Por el momento vamos a usar el mismo método
-app.put("/categories/:id", routesCategories.update);
-app.patch("/categories/:id", routesCategories.update);
-app.delete("/categories/:id", routesCategories.remove);
+app.use('/categories', routesCategories);
+
+app.use('/books', routesBooks);
+
 
 // Podemos filtrar por una o mas categorías
 // http://localhost:3000/books?q={"category": {"id":  "c8f5d5c9-b750-4ee2-a209-e0d4710c1976"}}
 // http://localhost:3000/books?q={"category":{"id":{"$in":["c8f5d5c9-b750-4ee2-a209-e0d4710c1976"]}}}
-app.get("/books", routesBooks.list);
-app.post("/books", routesBooks.create);
-app.get("/books/:id", routesBooks.get);
-// Por el momento vamos a usar el mismo método
-app.put("/books/:id", routesBooks.update);
-app.patch("/books/:id", routesBooks.update);
-app.delete("/books/:id", routesBooks.remove);
 
 app.use(require('./modules/error-handler'));
 
