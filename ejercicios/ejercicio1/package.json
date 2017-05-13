@@ -4,6 +4,8 @@
   "description": "Manejo de rutas con express",
   "main": "index.js",
   "scripts": {
+    "start-mongo-db": "docker run --name mongo-db -p 27017:27017 -d mongo:3.0",
+    "stop-mongo-db": "docker stop mongo-db && docker rm mongo-db",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

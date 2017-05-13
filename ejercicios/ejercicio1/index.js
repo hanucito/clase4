@@ -22,10 +22,16 @@ const app = express();
 const routesCategories = require("./routes/categories");
 const routesBooks = require("./routes/books");
 const bodyParser = require("body-parser");
+<<<<<<< Updated upstream
 const errorHandler = require("./modules/error-handler");
 const mongo = require("./modules/mongo");
+=======
+const mongo = require('./modules/mongo');
+>>>>>>> Stashed changes
 
 // Lo vemos en la próxima clase
+
+
 app.use(bodyParser.json());
 
 app.get("/categories", routesCategories.list);
@@ -47,8 +53,10 @@ app.put("/books/:id", routesBooks.update);
 app.patch("/books/:id", routesBooks.update);
 app.delete("/books/:id", routesBooks.remove);
 
-app.use(errorHandler);
+app.use(require('./modules/error-handler'));
 
-mongo.init().then(() => {
+
+mongo.init()
+.then(([books, categories]) => {
   app.listen(3000, () => console.log("Example app listening on port 3000!"));
-});
+})
